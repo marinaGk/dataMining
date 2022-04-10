@@ -1,0 +1,1 @@
+if ((os.stat(file_path).st_size == 0) == False): 
