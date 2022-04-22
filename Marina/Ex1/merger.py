@@ -7,7 +7,7 @@ def merge():
 
     real_path = os.path.realpath(__file__)
     dir_path = os.path.dirname(real_path)
-    dir_path = dir_path[0:-4] + "sources\\"
+    dir_path = dir_path + "\sources\\"
     os.chdir(dir_path) #works inside data directory (sources)
 
     filelist = []

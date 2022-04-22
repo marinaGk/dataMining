@@ -4,21 +4,26 @@ import pandas as pd
 import os
 from merger import *
     
+def make_day_dataframe(df, year, month, day): 
+
+    file = return_day(df, year, month, day) #file is part of dataframe regarding specified date
+    
+    cols = ['Solar','Wind','Geothermal','Biomass','Biogas','Small hydro','Coal','Nuclear','Natural gas','Large hydro','Batteries','Imports','Other']
+
+    file['Sums'] = file[cols].fillna(0).sum(axis = 1) #total energy used per day (all resources)
+
+    return file
+
 def energy_per_day(df, year, month, day): 
     '''Creates graph of energy used during specified date'''
     
+    file = make_day_dataframe(df, year, month, day)
+
     x = []
 
-    file = return_day(df, year, month, day) #file is part of dataframe regarding specified date
-
     time = file['Time'] #time will be used as x-axis 
-    
-    del file['Time']
-    del file['Day']
-    del file['Month']
-    del file['Year']
 
-    sums = file.sum(axis = 1) #total energy used per day (all resources)
+    sums = file['Sums']
     max = sums.max() #max energy measured (all resources)
     min = sums.min() #minimum energy measured (all resources)
     avg = sums.mean() #average energy consumed throughout day (all resources)
@@ -37,7 +42,7 @@ def energy_per_day(df, year, month, day):
 
     plt.xticks(x, time) #matches each tick on graph to each timestamp 
 
-    ax.scatter(x, sums, c = 'skyblue') #creates plot of points each one equal to a sum of energy at particular timestamp 
+    ax.plot(x, sums, c = 'skyblue') #creates plot of points each one equal to a sum of energy at particular timestamp 
 
     for i, tick in enumerate(ax.get_xticklabels()): #only shows timestamps per one hour
         if (i % 12 != 0): 

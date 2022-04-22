@@ -10,16 +10,9 @@ from day_data import *
 def return_stats(df, year, month, day):
     '''Used to return part of dataframe for each different date and get average energy used throughout it'''
 
-    file = return_day(df, year, month, day)
-    time = file['Time']
-    
-    del file['Time']
-    del file['Day']
-    del file['Month']
-    del file['Year']
+    file = make_day_dataframe(df, year, month, day)
 
-    sums = file.sum(axis = 1)
-    avg = sums.mean()
+    avg = file['Sums'].mean()
 
     return avg
 
@@ -33,6 +26,7 @@ def energy_per_year(df, year):
     average = pd.Series([], dtype='float64') #keeps average energy usage per day throughout year
 
     file = return_year(df, year) #file is part of dataframe regarding specified year 
+    file.reset_index(inplace = True, drop=True)
 
     for idx, row in file.iterrows(): 
 
@@ -66,7 +60,7 @@ def energy_per_year(df, year):
 
     plt.xticks(x, dates) #matches each tick on graph to each date
 
-    ax.scatter(x, average, c = 'skyblue') #creates plot of points each one equal to average energy at particular date 
+    ax.plot(x, average, c = 'skyblue') #creates plot of points each one equal to average energy at particular date 
 
     for i, tick in enumerate(ax.get_xticklabels()): #only shows dates at beggining of month 
         if i not in visible: 
