@@ -7,8 +7,8 @@ from day_data import *
 def return_stats(year, month, day):
     '''Used to return part of dataframe for each different date and get average energy used throughout it'''
 
+    #cols = ['Solar','Wind','Geothermal','Biomass','Biogas','Small hydro','Coal','Nuclear','Natural gas','Large hydro','Batteries','Imports','Other']
     file = make_day_dataframe(year, month, day)
-
     avg = file['Sums'].mean()
 
     return avg
@@ -35,8 +35,9 @@ def energy_per_year(year):
             if(row['Day'] == '01'): #beginning of month - only visible ticks
                 visible.append(idx/288)
 
-            avg = return_stats(int(row['Year']), int(row['Month']), int(row['Day'])) #day average
-            average = pd.concat([average, pd.Series([round(avg, 2)])])
+            avg = row['Sums average']
+            #avg = return_stats(int(row['Year']), int(row['Month']), int(row['Day'])) #day average
+            average = pd.concat([average, pd.Series([avg])])
 
     max = average.max()
     min = average.min()

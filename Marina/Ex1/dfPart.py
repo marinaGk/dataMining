@@ -9,16 +9,15 @@ def return_day(year, month, day):
     dir_path = os.path.dirname(real_path)
     os.chdir(dir_path)
 
-    df_file_path = dir_path + "\\merged.csv"
+    df_file_path = dir_path + "\\merged_source_files.csv"
     df = pd.read_csv(df_file_path)
     
     dateDf = df[df['Day'] == day]
     dateDf = dateDf[dateDf['Month'] == month]
-    dateDf = dateDf[dateDf['Year'] == year]
+    dateDf = dateDf[dateDf['Year'] == year] 
     dateDf.reset_index(inplace = True, drop=True)
 
     return dateDf
-
 
 def return_year(year): 
     '''Returns part of dateframe regarding requested year'''
@@ -27,7 +26,7 @@ def return_year(year):
     dir_path = os.path.dirname(real_path)
     os.chdir(dir_path)
 
-    df_file_path = dir_path + "\\merged.csv"
+    df_file_path = dir_path + "\\merged_source_files.csv"
     df = pd.read_csv(df_file_path)
 
     yearDf = df[df['Year'] == year]

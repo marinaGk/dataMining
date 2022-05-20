@@ -8,17 +8,19 @@ def make_day_dataframe(year, month, day):
 
     file = return_day(year, month, day) #file is part of dataframe regarding specified date
     
-    cols = ['Solar','Wind','Geothermal','Biomass','Biogas','Small hydro','Coal','Nuclear','Natural gas','Large hydro','Batteries','Imports','Other']
+    #cols = ['Solar','Wind','Geothermal','Biomass','Biogas','Small hydro','Coal','Nuclear','Natural gas','Large hydro','Batteries','Imports','Other']
 
-    file['Sums'] = file[cols].fillna(0).sum(axis = 1) #total energy used per day (all resources)
+    #file['Sums'] = file[cols].fillna(0).sum(axis = 1) #total energy used per day (all resources)
 
     return file
 
 def energy_per_day(year, month, day): 
     '''Creates graph of energy used during specified date'''
     
-    file = make_day_dataframe(year, month, day)
-
+    #cols = ['Solar','Wind','Geothermal','Biomass','Biogas','Small hydro','Coal','Nuclear','Natural gas','Large hydro','Batteries','Imports','Other']
+    #file = make_day_dataframe(cols, year, month, day)
+    file = return_day(year, month, day)
+    
     x = []
 
     time = file['Time'] #time will be used as x-axis 
