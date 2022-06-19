@@ -1,5 +1,4 @@
 import pandas as pd 
-import csv
 import os
 
 def return_day(year, month, day): 

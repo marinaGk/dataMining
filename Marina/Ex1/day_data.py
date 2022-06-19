@@ -1,6 +1,5 @@
 import matplotlib.pyplot as plt
 from numpy import size
-import pandas as pd
 from dfPart import * 
 from day_data import *
 
