@@ -14,10 +14,12 @@ from nltk.corpus import stopwords
 import os
 from sklearn.cluster import KMeans
 
+
 df = pd.read_csv("amazon.csv")
 
 text=[]
 scores=[]
+
 # for i in range(len(df)):
 #     text.append(df["Text"][i])
 #     scores.append(df["Score"][i])
@@ -199,14 +201,17 @@ for review in test_features:
 # print("Creating average feature vecs for test reviews")
 # testDataVecs = getAverageFeatureVecs(clean_test_reviews,model,num_features)
 
+
 # print("Randdom Forest ")
 # forest = RandomForestClassifier(n_estimators=100)
+
 
 # print ("Fitting a random forest to labeled training data...")
 
 # forest = forest.fit(trainDataVecs,train_labels)
 
 # result = forest.predict(testDataVecs)
+
 
 # print("Accuracy")
 # errors=0
@@ -290,3 +295,4 @@ for i in range(len(test_labels)):
         errors+=1
         print(i,test_features[i],test_labels[i],result[i])
 print(errors,errors/10000)
+
