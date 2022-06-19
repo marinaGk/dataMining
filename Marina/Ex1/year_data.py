@@ -4,15 +4,6 @@ import pandas as pd
 from dfPart import * 
 from day_data import *
 
-def return_stats(year, month, day):
-    '''Used to return part of dataframe for each different date and get average energy used throughout it'''
-
-    #cols = ['Solar','Wind','Geothermal','Biomass','Biogas','Small hydro','Coal','Nuclear','Natural gas','Large hydro','Batteries','Imports','Other']
-    file = make_day_dataframe(year, month, day)
-    avg = file['Sums'].mean()
-
-    return avg
-
 def energy_per_year(year):
     '''Creates graph of energy used during specified year'''
 
@@ -32,11 +23,10 @@ def energy_per_year(year):
             date = str(row['Day']) + "-" + str(row['Month'])
             dates.append(date) 
             
-            if(row['Day'] == '01'): #beginning of month - only visible ticks
+            if(row['Day'] == 1): #beginning of month - only visible ticks
                 visible.append(idx/288)
 
             avg = row['Sums average']
-            #avg = return_stats(int(row['Year']), int(row['Month']), int(row['Day'])) #day average
             average = pd.concat([average, pd.Series([avg])])
 
     max = average.max()

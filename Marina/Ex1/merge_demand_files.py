@@ -2,6 +2,7 @@ import pandas as pd
 import os
 
 def merge_demands(): 
+    '''Merges all demand files into one, required to make data processing faster'''
 
     real_path = os.path.realpath(__file__)
     dir_path = os.path.dirname(real_path)
@@ -26,6 +27,10 @@ def merge_demands():
             day_df = pd.read_csv(file)
             day_df.drop(day_df.iloc[-1].name, inplace=True)
 
+            #found out all demands files are 288 samples long so there's no need to delete/add records
+            #if (row_count!=288) : print("not 288 lines" + filename)
+
+            #works the same way as in sources to fix null entries
             nulls = []
             cols = ['Day ahead forecast', 'Hour ahead forecast', 'Current demand']
             for i in cols: 
@@ -41,10 +46,9 @@ def merge_demands():
                     else:
                         day_df[i].loc[j] = day_df[i].loc[j-1]
 
-            row_count = len(day_df) #counts amount of rows per day in order to add its date same amount of times to 'Date' column on database
+            #counts amount of rows per day in order to add its date same amount of times to 'Date' column on database
             #didn't try to make subrows since, either way, key for each row is both date and time
-
-            if (row_count!=288) : print(filename)
+            row_count = len(day_df) 
 
             days = days + [filename[6:8]]*row_count
             months = months + [filename[4:6]]*row_count

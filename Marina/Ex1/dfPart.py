@@ -12,6 +12,7 @@ def return_day(year, month, day):
     df_file_path = dir_path + "\\merged_source_files.csv"
     df = pd.read_csv(df_file_path)
     
+    #uses day, month, year columns of dataframe to get part of it regarding specified date
     dateDf = df[df['Day'] == day]
     dateDf = dateDf[dateDf['Month'] == month]
     dateDf = dateDf[dateDf['Year'] == year] 

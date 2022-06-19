@@ -2,7 +2,8 @@ import os
 import pandas as pd
 
 def data_merge(): 
-
+    '''Makes file containing both sources and demands records'''
+    
     real_path = os.path.realpath(__file__)
     dir_path = os.path.dirname(real_path)
     os.chdir(dir_path) #works inside data directory (sources)
