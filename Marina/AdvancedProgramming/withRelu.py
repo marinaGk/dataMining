@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import math
+import os
 
 from tensorflow import keras 
 from keras.models import Sequential
@@ -10,7 +11,6 @@ from keras.losses import MeanSquaredError
 from keras.metrics import RootMeanSquaredError
 from keras.optimizers import Adam
 from keras.models import load_model
-from dfPart import *
 
 import sklearn.metrics as metrics
 
