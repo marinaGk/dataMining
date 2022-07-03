@@ -4,12 +4,18 @@ from day_data import *
 from year_data import *
 from source_data import *
 from outlier_finder import *
+from import_data import *
 from functions import *
 from tkinter import *
+from tkinter import filedialog
 from tkinter.ttk import Combobox
 import matplotlib.pyplot as plt
 from numpy import size
 from tkcalendar import *
+import os
+
+directory=os.getcwd()
+
 
 class Application(Tk): 
 
@@ -63,14 +69,23 @@ class Application(Tk):
         print(data)
         res1 = checkDate(self.e1.get())
         res2 = checkTime(self.e2.get())
-        if res1==None or res1=="WrongDate" or res2==None:
+        if res1==None or res1=="WrongDate" or res2==None or res2=="WrongDate":
             print("Wrong Input")
         else:
-            self.new_path = [res1,res2]
+            self.new_path = data
             print(self.new_path) 
 
+    def func5(self):
+        data = self.e3.get()
+        res = checkFileName(data)
+        print(res)
+        if res==None or res=="WrongDate":
+            print("Wrong Input")
+        else:
+            self.new_path = data
+            insertfiles(data)
+        
     def makeOutlierButton(self):
-
         if(len(self.dataButtonCanvas.winfo_children())>0):
             for item in self.dataButtonCanvas.winfo_children():
                 item.destroy()
@@ -94,21 +109,27 @@ class Application(Tk):
             for item in self.dataButtonCanvas.winfo_children():
                 item.destroy()
         print("Prediction of energy sources")
-        self.Label1 = Label(self.dataButtonCanvas,text="Prediction Date(xxxx-yy-zz)",background = 'pink').grid(row=1,column=1)
-        self.e1= Entry(self.dataButtonCanvas)
-        self.e1.grid(row=2,column=1)
-        self.Label2 = Label(self.dataButtonCanvas,text="Prediction Time(xx:00)",background = 'pink').grid(row=1,column=2)
-        self.e2= Entry(self.dataButtonCanvas)
-        self.e2.grid(row=2,column=2)
+        # self.Label1 = Label(self.dataButtonCanvas,text="Prediction Date(xxxx-yy-zz)",background = 'pink').grid(row=1,column=1)
+        # self.e1= Entry(self.dataButtonCanvas)
+        # self.e1.grid(row=2,column=1)
+        # self.Label2 = Label(self.dataButtonCanvas,text="Prediction Time(xx:00)",background = 'pink').grid(row=1,column=2)
+        # self.e2= Entry(self.dataButtonCanvas)
+        # self.e2.grid(row=2,column=2)
 
-        self.goButton = Button(self.dataButtonCanvas, text = "Go", font = 'sans-serif', command = self.func4)
-        self.goButton.grid(row = 2, column = 3)
+        # self.goButton = Button(self.dataButtonCanvas, text = "Go", font = 'sans-serif', command = self.func4)
+        # self.goButton.grid(row = 2, column = 3)
     
     def makeImportButton(self):
         if(len(self.dataButtonCanvas.winfo_children())>0):
             for item in self.dataButtonCanvas.winfo_children():
                 item.destroy()
         print("Import Data File")
+        self.Label1 = Label(self.dataButtonCanvas,text="Name of file (the name must be a date for example (20220202) and must be a csv file)",background = 'pink').grid(row=1,column=1)
+        self.e3= Entry(self.dataButtonCanvas)
+        self.e3.grid(row=2,column=1)
+        self.goButton = Button(self.dataButtonCanvas, text = "Go", font = 'sans-serif', command = self.func5)
+        self.goButton.grid(row = 3, column = 1)
+
 
     def makeSourceButton(self): 
 
@@ -139,7 +160,7 @@ class Application(Tk):
         print("Get Graph by year")
         self.data.set("Pick a year")
 
-        options = ["2019", "2020", "2021"]
+        options = ["2019", "2020", "2021","2022"]
         self.button = OptionMenu(self.dataButtonCanvas, self.data, *options)
         self.button.grid(row = 2, column = 0)
 
@@ -163,6 +184,8 @@ class Application(Tk):
 
         self.goButton = Button(self.dataButtonCanvas, text = "Go", font = 'sans-serif', command = self.func1)
         self.goButton.grid(row = 2, column = 1)
+
+
 
     def makeButtons(self, xaxisCanvas): 
 
@@ -233,7 +256,6 @@ class Application(Tk):
         self.columnconfigure(0, weight = 1)
         self.makeLabelCanvas()
         self.makeXAxisCanvas()
-
 
 app = Application()
 app.mainloop()
