@@ -27,10 +27,12 @@ def create_app():
             prediction = input_prediction(demands, renewables)
 
         return render_template('form.html', prediction = prediction[0])
-
+    
+    return app
 
 if __name__ == "__main__": 
     app = create_app()
     app.run(debug=True)
+    
 
 
