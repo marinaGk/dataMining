@@ -105,7 +105,7 @@ def make_prediction():
     X_train, y_train = X[:train_len], y[:train_len]
     X_val, y_val = X[train_len:val_len+train_len], y[train_len:val_len+train_len]
     X_test, y_test = X[val_len+train_len:], y[val_len+train_len:]
-    #make_model(X_train, y_train, X_val, y_val)
+    make_model(X_train, y_train, X_val, y_val)
 
     check_prediction(X_train, y_train, X_val, y_val, X_test, y_test)
 
@@ -134,3 +134,5 @@ def input_prediction(demands, renewables):
     prediction = model1.predict(data).flatten()
     print(prediction)
     return prediction
+
+make_prediction()
