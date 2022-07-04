@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Energy predictor</title>
+</head>
+<body>
+    <form action = "http://localhost:5000/form" method = "post" style = "display: flex; flex-direction: column;"> 
+
+        <p style = "margin: auto; padding-bottom: 20px;"> Enter data: </p>
+
+        <div class = "per_five_input" style = "margin : auto; display: flex; flex-direction: row; padding: 10px;"> 
+            <label for = "demand1"> Current demand</label>
+            <input name = "demand1" type = "number">
+            <label for = "renewable1"> Renewable production </label>
+            <input name = "renewable1" type = "number"> 
+        </div>
+
+        <div class = "per_five_input" style = "margin : auto; display: flex; flex-direction: row; padding: 10px;"> 
+            <label for = "demand2"> Current demand</label>
+            <input name = "demand2" type = "number">
+            <label for = "renewable2"> Renewable production </label>
+            <input name = "renewable2" type = "number"> 
+        </div>
+
+        <div class = "per_five_input" style = "margin : auto; display: flex; flex-direction: row; padding: 10px;"> 
+            <label for = "demand3"> Current demand</label>
+            <input name = "demand3" type = "number">
+            <label for = "renewable3"> Renewable production </label>
+            <input name = "renewable3" type = "number"> 
+        </div>
+
+        <div class = "per_five_input" style = "margin : auto; display: flex; flex-direction: row; padding: 10px;"> 
+            <label for = "demand4"> Current demand</label>
+            <input name = "demand4" type = "number">
+            <label for = "renewable4"> Renewable production </label>
+            <input name = "renewable4" type = "number"> 
+        </div>
+
+        <div class = "per_five_input" style = "margin : auto; display: flex; flex-direction: row; padding: 10px;"> 
+            <label for = "demand5"> Current demand</label>
+            <input name = "demand5" type = "number">
+            <label for = "renewable5"> Renewable production </label>
+            <input name = "renewable5" type = "number"> 
+        </div>
+
+        <input type = "submit" value = "Submit" style = "margin: auto;"/>
+    </form>
+    
+    <div class = 'prediction'> 
+        Predicted non-renewable energy requirement is: {{prediction}}
+    </div>
+</body>
+</html>
