@@ -73,12 +73,17 @@ def check_prediction(X_train, y_train, X_val, y_val, X_test, y_test):
 def make_prediction(): 
     '''Uses merged data to find already known non renewable energy requirements and predict future ones'''
 
-    real_path = os.path.realpath(__file__)
-    dir_path = os.path.dirname(real_path)
-    os.chdir(dir_path)
+    #directory=os.getcwd()
+    #os.chdir(directory)
+    real_path = os.path.realpath(__file__) #file path
+    dir_path = os.path.dirname(real_path) #neural network
+    root_path = os.path.dirname(dir_path) #root 
+
+    current_path = "{}/data".format(root_path)
+    os.chdir(current_path) #works inside data directory 
 
     #uses merged file to make calculations quicker
-    df_file_path = dir_path + "\\merged_files.csv"
+    df_file_path = current_path + "\\merged_files.csv"
     df = pd.read_csv(df_file_path)
 
     #keeps only necessary part of dataframe to work with 
@@ -105,34 +110,35 @@ def make_prediction():
     X_train, y_train = X[:train_len], y[:train_len]
     X_val, y_val = X[train_len:val_len+train_len], y[train_len:val_len+train_len]
     X_test, y_test = X[val_len+train_len:], y[val_len+train_len:]
+
+    print(dir_path)
+    os.chdir(dir_path)
     make_model(X_train, y_train, X_val, y_val)
 
     check_prediction(X_train, y_train, X_val, y_val, X_test, y_test)
 
-def input_prediction(demands, renewables): 
+# def input_prediction(demands, renewables): 
 
-    differences = pd.DataFrame()
-    difs = []
-    data = []
+#     differences = pd.DataFrame()
+#     difs = []
+#     data = []
 
-    for i in range(5): 
-        dif = float(demands[i]) - float(renewables[i])
-        difs.append(dif) 
+#     for i in range(5): 
+#         dif = float(demands[i]) - float(renewables[i])
+#         difs.append(dif) 
 
-    differences.insert(0, 'Difference', difs)
-    npdf = differences.to_numpy()
-    data.append(npdf)
-    data = np.array(data)
-    print(data)
+#     differences.insert(0, 'Difference', difs)
+#     npdf = differences.to_numpy()
+#     data.append(npdf)
+#     data = np.array(data)
+#     print(data)
 
-    real_path = os.path.realpath(__file__)
-    dir_path = os.path.dirname(real_path)
-    os.chdir(dir_path)
+#     real_path = os.path.realpath(__file__)
+#     dir_path = os.path.dirname(real_path)
+#     os.chdir(dir_path)
 
-    model1 = load_model('model/')
+#     model1 = load_model('model/')
 
-    prediction = model1.predict(data).flatten()
-    print(prediction)
-    return prediction
+#     prediction = model1.predict(data).flatten()
 
-make_prediction()
+#     return prediction
