@@ -4,10 +4,6 @@ import pandas as pd
 import os
 import numpy as np
 
-
-directory=os.getcwd()
-os.chdir(directory)
-
 def returns_stats(array): 
 
     max = array.max()
@@ -22,7 +18,13 @@ def source_per_day(source_index):
     options = ["Solar", "Wind", "Geothermal", "Biomass", "Biogas", "Small hydro", "Coal", "Nuclear", "Natural gas", "Large hydro", "Batteries", "Imports", "Other"]
     # real_path = os.path.realpath(__file__)
     # dir_path = os.path.dirname(real_path)
-    dir_path = "{}/data".format(directory)
+    
+    real_path = os.path.realpath(__file__)
+    dir_path = os.path.dirname(real_path)
+    dir_path = os.path.dirname(dir_path)
+    root_path = os.path.dirname(dir_path)
+    
+    dir_path = "{}/data".format(root_path)
     os.chdir(dir_path)
     dir_path = dir_path + "\processed_sources\\"
     os.chdir(dir_path)

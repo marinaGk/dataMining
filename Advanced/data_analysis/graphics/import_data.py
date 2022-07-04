@@ -4,31 +4,32 @@ from os import X_OK, listdir
 from os.path import isfile, join
 import numpy as np
 
-directory=os.getcwd()
-os.chdir(directory)
 
 ##Inserting a file into the database, means also that you already have a file for demands and soucres in the new_data folder with the same name <date>.csv.
 ##If these files are there and valid, we do some preprocessing and we insert the new data in the database.
 
 def insertfiles(filename):
-    print(filename)
     filename = filename + ".csv"
 
-    os.chdir("{}/data/sources".format(directory))
+    real_path = os.path.realpath(__file__)
+    dir_path = os.path.dirname(real_path)
+    dir_path = os.path.dirname(dir_path)
+    root_path = os.path.dirname(dir_path)
+
+    os.chdir("{}\data\sources".format(root_path))
     time_df = pd.read_csv("20190101.csv")
     time = time_df['Time'].tolist()
 
     sources_headers = ["Time","Solar","Wind","Geothermal","Biomass","Biogas","Small hydro","Coal","Nuclear","Natural gas","Large hydro","Batteries","Imports","Other"]
     demands_headers = ["Time","Day ahead forecast","Hour ahead forecast","Current demand"]
 
-    mypath="{}/data/processed_sources".format(directory)
+    mypath="{}\data\processed_sources".format(root_path)
     os.chdir(mypath)
     files = [f for f in listdir(mypath) if isfile(join(mypath, f))]
-
-    mypath1="{}/data/new_data/sources".format(directory)
+    mypath1="{}\data\\new_data\sources".format(root_path)
     os.chdir(mypath1)
     sourcesfiles = [f for f in listdir(mypath1) if isfile(join(mypath1, f))]
-    mypath2="{}/data/new_data/demands".format(directory)
+    mypath2="{}\data\\new_data\demands".format(root_path)
     os.chdir(mypath2)
     demandsfiles = [f for f in listdir(mypath2) if isfile(join(mypath2, f))]
 
@@ -49,10 +50,10 @@ def insertfiles(filename):
             
             ##Here is where the preprocessing happens 
 
-            mypath="{}/data/demand".format(directory)
+            mypath="{}\data\demand".format(root_path )
             os.chdir(mypath)
             df2.to_csv( "{}".format(filename), index=False, encoding='utf-8-sig')
-            mypath="{}/data/sources".format(directory)
+            mypath="{}\data\sources".format(root_path )
             os.chdir(mypath)
             df1.to_csv( "{}".format(filename), index=False, encoding='utf-8-sig')
 
@@ -83,7 +84,7 @@ def insertfiles(filename):
                     for z in range(1,len(sources_headers)):
                         d.append(list_tuples[-1][z])
                     list_tuples.append(d)
-            mypath="{}/data/processed_sources".format(directory)
+            mypath="{}\data\processed_sources".format(root_path)
             os.chdir(mypath)
             new_csv = pd.DataFrame(list_tuples)
             new_csv.columns = sources_headers
@@ -113,7 +114,7 @@ def insertfiles(filename):
                     for z in range(1,len(demands_headers)):
                         d.append(list_tuples[-1][z])
                     list_tuples.append(d)
-            mypath="{}/data/processed_demands".format(directory)
+            mypath="{}\data\processed_demands".format(root_path )
             os.chdir(mypath)
             new_csv = pd.DataFrame(list_tuples)
             new_csv.columns = demands_headers
@@ -130,13 +131,14 @@ def insertfiles(filename):
 def merge_sources(): 
     '''Merges all source files into one, required to make data processing faster'''
     
-    # real_path = os.path.realpath(__file__)
-    # dir_path = os.path.dirname(real_path)
-    # dir_path = dir_path + "\sources\\"
-    real_path = "{}/data".format(directory)
-    dir_path = "{}/data/sources".format(directory)
-    os.chdir(dir_path) 
-    os.chdir(dir_path) #works inside data directory (sources)
+    real_path = os.path.realpath(__file__)
+    dir_path = os.path.dirname(real_path)
+    dir_path = os.path.dirname(dir_path)
+    root_path = os.path.dirname(dir_path)
+
+    data_path = "{}\data".format(root_path)
+    source_path = "{}\sources".format(data_path)
+    os.chdir(source_path) 
 
     filelist = []
     row_count = 0 
@@ -147,12 +149,12 @@ def merge_sources():
     df = pd.DataFrame() #dataFrame to be used to store data 
     day_df = pd.DataFrame()
 
-    time_df = pd.read_csv(dir_path + "/20190101.csv") #reads sample times from one of the files 
+    time_df = pd.read_csv(source_path + "/20190101.csv") #reads sample times from one of the files 
     time = time_df['Time'].tolist()
 
-    for filename in os.listdir(dir_path):
+    for filename in os.listdir(source_path):
 
-        file = dir_path + "/" + filename
+        file = source_path + "/" + filename
 
         if ((os.stat(file).st_size == 0) == False):
 
@@ -220,7 +222,7 @@ def merge_sources():
     df.insert(1, 'Month', months) #adds month column 
     df.insert(2, 'Year', years) #adds year column
     
-    new_path = os.path.dirname(real_path) + "\data\\merged_source_files.csv"
+    new_path = data_path + "\\merged_source_files.csv"
     df.info()
     df.to_csv(new_path, index=False)
 
@@ -228,12 +230,15 @@ def merge_sources():
 
 def merge_demands(): 
     '''Merges all demand files into one, required to make data processing faster'''
-    # real_path = os.path.realpath(__file__)
-    # dir_path = os.path.dirname(real_path)
-    # dir_path = dir_path + "\demand\\"
-    real_path = "{}/data".format(directory)
-    dir_path = "{}/data/demand".format(directory)
-    os.chdir(dir_path) #works inside data directory (sources)
+    
+    real_path = os.path.realpath(__file__)
+    dir_path = os.path.dirname(real_path)
+    dir_path = os.path.dirname(dir_path)
+    root_path = os.path.dirname(dir_path)
+
+    data_path = "{}\data".format(root_path)
+    demand_path = "{}\demand".format(data_path)
+    os.chdir(data_path) 
 
     filelist = []
     row_count = 0 
@@ -244,9 +249,9 @@ def merge_demands():
     df = pd.DataFrame() #dataFrame to be used to store data 
     day_df = pd.DataFrame()
 
-    for filename in os.listdir(dir_path):
+    for filename in os.listdir(demand_path):
 
-        file = dir_path + "/" + filename
+        file = demand_path + "/" + filename
 
         if ((os.stat(file).st_size == 0) == False):
 
@@ -288,21 +293,23 @@ def merge_demands():
     df.insert(2, 'Year', years) #adds year column
 
     df.info()
-    new_path = os.path.dirname(real_path) + "\data\\merged_demand_files.csv"
+    new_path = data_path + "\\merged_demand_files.csv"
     df.to_csv(new_path, index=False)
+
 
 def data_merge(): 
     '''Makes file containing both sources and demands records'''
 
-    # real_path = os.path.realpath(__file__)
-    # dir_path = os.path.dirname(real_path)
-    real_path = "{}/data".format(directory)
-    dir_path = "{}/data".format(directory)
-    os.chdir(dir_path) 
-    os.chdir(dir_path) #works inside data directory (sources)
+    real_path = os.path.realpath(__file__)
+    dir_path = os.path.dirname(real_path)
+    dir_path = os.path.dirname(dir_path)
+    root_path = os.path.dirname(dir_path)
 
-    demands_file = dir_path + "\\merged_demand_files.csv"
-    sources_file = dir_path + "\\merged_source_files.csv"
+    data_path = "{}\data".format(root_path)
+    os.chdir(data_path) 
+
+    demands_file = data_path + "\\merged_demand_files.csv"
+    sources_file = data_path + "\\merged_source_files.csv"
 
     demands_df = pd.read_csv(demands_file)
     sources_df = pd.read_csv(sources_file)
@@ -312,7 +319,7 @@ def data_merge():
         column = demands_df[i].tolist()
         sources_df[i] = column
 
-    new_path = os.path.dirname(real_path) + "\data\\merged_files.csv"
+    new_path = data_path + "\\merged_files.csv"
     sources_df.info()
     sources_df.to_csv(new_path, index=False)
 
