@@ -6,7 +6,6 @@ import random
 import numpy as np
 
 
-directory=os.getcwd()
 
 ##Προεπεξεργασία των Δεδομένων. Εδώ επεξεργαζόμαστε τα δεδομένα μας ώστε σε κάθε αρχείο excel που βρίσκεται στους φακέλους sources και demands που μας δίνονται
 ##να έχει τον ίδιο αριθμό δεδομενών (288). Σε περίπτωση που ένα αρχείο έχει παραπάνω δεδομένα, τα διαγράφουμε. Αν σε ένα αρχείο λείπουν δεδομένα, φροντίζουμε ώστε
@@ -15,7 +14,11 @@ directory=os.getcwd()
 ##αντίστοιχα που φτιάξαμε.Τα αρχεία αυτά υπάρχουν έτοιμα στο data.zip. 
 
 print("SOURCES")
-mypath="{}/data/sources".format(directory)
+real_path = os.path.realpath(__file__)
+dir_path = os.path.dirname(real_path)
+dir_path = os.path.dirname(dir_path)
+root_path = os.path.dirname(dir_path)
+mypath="{}\data\sources".format(root_path)
 os.chdir(mypath)
 
 df=pd.read_csv("20190101.csv")
@@ -28,7 +31,7 @@ sources_headers = ["Time","Solar","Wind","Geothermal","Biomass","Biogas","Small 
 
 for x in range(len(sourcesfiles)):
    try:
-       mypath="{}/data/sources".format(directory)
+       mypath="{}\data\sources".format(root_path)
        os.chdir(mypath)
        list_tuples = []
        df1 = pd.read_csv(sourcesfiles[x])
@@ -53,7 +56,7 @@ for x in range(len(sourcesfiles)):
                for z in range(1,len(sources_headers)):
                    d.append(list_tuples[-1][z])
                list_tuples.append(d)   
-       mypath="{}/data/processed_sources".format(directory)
+       mypath="{}\data\processed_sources".format(root_path)
        os.chdir(mypath) 
        new_csv = pd.DataFrame(list_tuples)
        new_csv.columns = sources_headers
@@ -62,7 +65,7 @@ for x in range(len(sourcesfiles)):
        continue
 
 print("DEMANDS")
-mypath="{}/data/demand".format(directory)
+mypath="{}\data\demand".format(root_path)
 os.chdir(mypath)
 
 demandfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
@@ -71,7 +74,7 @@ demands_headers = ["Time","Day ahead forecast","Hour ahead forecast","Current de
 
 for x in range(len(demandfiles)):
    try:
-       mypath="{}/data/demand".format(directory)
+       mypath="{}\data\demand".format(root_path)
        os.chdir(mypath)
        list_tuples = []
        df1 = pd.read_csv(demandfiles[x])
@@ -96,7 +99,7 @@ for x in range(len(demandfiles)):
                for z in range(1,len(demands_headers)):
                    d.append(list_tuples[-1][z])
                list_tuples.append(d)
-       mypath="{}/data/processed_demands".format(directory)
+       mypath="{}\data\processed_demands".format(root_path)
        os.chdir(mypath)
        new_csv = pd.DataFrame(list_tuples)
        new_csv.columns = demands_headers
