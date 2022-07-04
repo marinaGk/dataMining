@@ -1,11 +1,16 @@
 import pandas as pd 
 import os
 
+directory=os.getcwd()
+os.chdir(directory)
+
 def return_day(year, month, day): 
     '''Returns part of dataframe regarding requested date'''
 
-    real_path = os.path.realpath(__file__)
-    dir_path = os.path.dirname(real_path)
+
+    # real_path = os.path.realpath(__file__)
+    # dir_path = os.path.dirname(real_path)
+    dir_path = "{}/data".format(directory)
     os.chdir(dir_path)
 
     df_file_path = dir_path + "\\merged_source_files.csv"
@@ -21,9 +26,9 @@ def return_day(year, month, day):
 
 def return_year(year): 
     '''Returns part of dateframe regarding requested year'''
-
-    real_path = os.path.realpath(__file__)
-    dir_path = os.path.dirname(real_path)
+    # real_path = os.path.realpath(__file__)
+    # dir_path = os.path.dirname(real_path)
+    dir_path = "{}/data".format(directory)
     os.chdir(dir_path)
 
     df_file_path = dir_path + "\\merged_source_files.csv"

@@ -1,12 +1,16 @@
 import pandas as pd 
 import os
 
+directory=os.getcwd()
+os.chdir(directory)
+
 def merge_demands(): 
     '''Merges all demand files into one, required to make data processing faster'''
-
-    real_path = os.path.realpath(__file__)
-    dir_path = os.path.dirname(real_path)
-    dir_path = dir_path + "\demand\\"
+    # real_path = os.path.realpath(__file__)
+    # dir_path = os.path.dirname(real_path)
+    # dir_path = dir_path + "\demand\\"
+    real_path = "{}/data".format(directory)
+    dir_path = "{}/data/demand".format(directory)
     os.chdir(dir_path) #works inside data directory (sources)
 
     filelist = []
@@ -20,7 +24,7 @@ def merge_demands():
 
     for filename in os.listdir(dir_path):
 
-        file = dir_path + filename
+        file = dir_path + "/" + filename
 
         if ((os.stat(file).st_size == 0) == False):
 
@@ -62,7 +66,7 @@ def merge_demands():
     df.insert(2, 'Year', years) #adds year column
 
     df.info()
-    new_path = os.path.dirname(real_path) + "\\merged_demand_files.csv"
+    new_path = os.path.dirname(real_path) + "\data\\merged_demand_files.csv"
     df.to_csv(new_path, index=False)
 
 merge_demands()
