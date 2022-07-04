@@ -12,7 +12,6 @@ import plotly.express as px
 
 
 directory=os.getcwd()
-print(directory)
 ##Here we find the days-outliers of our database. Days that their demand or supplement of energy is more or less than usual. Important 
 ##if we want to see if there are wrong data in a day. 
 

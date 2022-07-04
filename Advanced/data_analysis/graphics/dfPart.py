@@ -7,13 +7,15 @@ os.chdir(directory)
 def return_day(year, month, day): 
     '''Returns part of dataframe regarding requested date'''
 
+    real_path = os.path.realpath(__file__)
+    dir_path = os.path.dirname(real_path)
+    dir_path = os.path.dirname(dir_path)
+    root_path = os.path.dirname(dir_path)
 
-    # real_path = os.path.realpath(__file__)
-    # dir_path = os.path.dirname(real_path)
-    dir_path = "{}/data".format(directory)
-    os.chdir(dir_path)
+    data_path = "{}\data".format(root_path)
+    os.chdir(data_path)
 
-    df_file_path = dir_path + "\\merged_source_files.csv"
+    df_file_path = data_path + "\\merged_source_files.csv"
     df = pd.read_csv(df_file_path)
     
     #uses day, month, year columns of dataframe to get part of it regarding specified date
@@ -26,12 +28,16 @@ def return_day(year, month, day):
 
 def return_year(year): 
     '''Returns part of dateframe regarding requested year'''
-    # real_path = os.path.realpath(__file__)
-    # dir_path = os.path.dirname(real_path)
-    dir_path = "{}/data".format(directory)
-    os.chdir(dir_path)
 
-    df_file_path = dir_path + "\\merged_source_files.csv"
+    real_path = os.path.realpath(__file__)
+    dir_path = os.path.dirname(real_path)
+    dir_path = os.path.dirname(dir_path)
+    root_path = os.path.dirname(dir_path)
+
+    data_path = "{}\data".format(root_path)
+    os.chdir(data_path)
+
+    df_file_path = data_path + "\\merged_source_files.csv"
     df = pd.read_csv(df_file_path)
 
     yearDf = df[df['Year'] == year]

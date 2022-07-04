@@ -6,12 +6,15 @@ os.chdir(directory)
 
 def merge_demands(): 
     '''Merges all demand files into one, required to make data processing faster'''
-    # real_path = os.path.realpath(__file__)
-    # dir_path = os.path.dirname(real_path)
-    # dir_path = dir_path + "\demand\\"
-    real_path = "{}/data".format(directory)
-    dir_path = "{}/data/demand".format(directory)
-    os.chdir(dir_path) #works inside data directory (sources)
+
+    real_path = os.path.realpath(__file__)
+    dir_path = os.path.dirname(real_path)
+    dir_path = os.path.dirname(dir_path)
+    root_path = os.path.dirname(dir_path)
+
+    data_path = "{}\data".format(root_path)
+    demand_path = "{}\demand".format(data_path)
+    os.chdir(data_path) 
 
     filelist = []
     row_count = 0 
@@ -22,9 +25,9 @@ def merge_demands():
     df = pd.DataFrame() #dataFrame to be used to store data 
     day_df = pd.DataFrame()
 
-    for filename in os.listdir(dir_path):
+    for filename in os.listdir(demand_path):
 
-        file = dir_path + "/" + filename
+        file = demand_path + "/" + filename
 
         if ((os.stat(file).st_size == 0) == False):
 
@@ -66,7 +69,7 @@ def merge_demands():
     df.insert(2, 'Year', years) #adds year column
 
     df.info()
-    new_path = os.path.dirname(real_path) + "\data\\merged_demand_files.csv"
+    new_path = data_path + "\\merged_demand_files.csv"
     df.to_csv(new_path, index=False)
 
 merge_demands()

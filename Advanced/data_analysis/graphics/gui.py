@@ -11,9 +11,6 @@ from tkinter import filedialog
 from tkinter.ttk import Combobox
 from numpy import size
 from tkcalendar import *
-import os
-
-directory=os.getcwd()
 
 
 class Application(Tk): 
@@ -62,7 +59,6 @@ class Application(Tk):
             find_outliers(self.new_path)
 
     def func5(self):
-        
         '''Calls functions to import new data'''
         
         data = self.e3.get()
@@ -109,7 +105,6 @@ class Application(Tk):
         self.goButton = Button(self.dataButtonCanvas, text = "Go", font = 'sans-serif', command = self.func5)
         self.goButton.grid(row = 3, column = 1)
 
-
     def makeSourceButton(self): 
         if(len(self.dataButtonCanvas.winfo_children())>0):
             for item in self.dataButtonCanvas.winfo_children():
@@ -154,8 +149,6 @@ class Application(Tk):
 
         self.goButton = Button(self.dataButtonCanvas, text = "Go", font = 'sans-serif', command = self.func1)
         self.goButton.grid(row = 2, column = 1)
-
-
 
     def makeButtons(self, xaxisCanvas): 
         '''Creation of buttons of gui application'''
@@ -215,7 +208,8 @@ class Application(Tk):
         label.grid(row = 0, column = 0)
     
     def __init__(self):
-        '''Creation of gui'''
+        '''Creates gui'''
+
         super().__init__()
         self.geometry("500x300+700+300")
         self.resizable(False, False)
