@@ -10,8 +10,6 @@ from collections import Counter
 from math import sqrt
 import plotly.express as px
 
-
-directory=os.getcwd()
 ##Here we find the days-outliers of our database. Days that their demand or supplement of energy is more or less than usual. Important 
 ##if we want to see if there are wrong data in a day. 
 
@@ -22,7 +20,13 @@ directory=os.getcwd()
 
 def find_outliers(array):
     
-    dir_path = "{}/data/processed_sources".format(directory)
+
+    real_path = os.path.realpath(__file__)
+    dir_path = os.path.dirname(real_path)
+    dir_path = os.path.dirname(dir_path)
+    root_path = os.path.dirname(dir_path)
+
+    dir_path = "{}\data\processed_sources".format(root_path)
     os.chdir(dir_path)
 
     files = [f for f in listdir(dir_path) if isfile(join(dir_path, f))]
@@ -49,7 +53,7 @@ def find_outliers(array):
     for i in range(len(files)):
         sources_of_day=[]
         demands_of_day=[]
-        mypath="{}/data/processed_sources".format(directory)
+        mypath="{}/data/processed_sources".format(root_path)
         os.chdir(mypath)
         df1 = pd.read_csv(files[i])
         for j in range(int(k*len(df1)/24),int(l*len(df1)/24)):
@@ -58,7 +62,7 @@ def find_outliers(array):
                 total+=df1.iloc[j,x]
             sources_of_day.append(total) 
 
-        mypath="{}/data/processed_demands".format(directory)
+        mypath="{}/data/processed_demands".format(root_path)
         os.chdir(mypath)
         df2 = pd.read_csv(files[i])
         for j in range(int(k*len(df2)/24),int(l*len(df2)/24)):
