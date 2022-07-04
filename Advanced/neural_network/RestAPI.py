@@ -4,6 +4,7 @@ from input_prediction import input_prediction
 def create_app(): 
     app = Flask(__name__)
 
+
     @app.route("/")
     def input_form(): 
         return render_template('form.html')
@@ -27,6 +28,9 @@ def create_app():
             prediction = input_prediction(demands, renewables)
 
         return render_template('form.html', prediction = prediction[0])
+    
+    return app
+
 
 
 if __name__ == "__main__": 
