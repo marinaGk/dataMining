@@ -12,6 +12,8 @@ from keras.optimizers import Adam
 from keras.models import load_model
 from dfPart import *
 
+import sklearn.metrics as metrics
+
 def form_data(df, window_size): 
     '''Forms data to be used in model'''
 
@@ -32,17 +34,17 @@ def make_model(X_train, y_train, X_val, y_val):
     '''Makes the model and runs it to make prediction'''
 
     model = Sequential()
-    model.add(InputLayer((5, 1)))
-    model.add(LSTM(64))
-    model.add(Dense(8, 'relu'))
-    model.add(Dense(1, 'linear'))
+    model.add(InputLayer((5, 1))) #input layer
+    model.add(LSTM(64)) #lstm hidden layer
+    model.add(Dense(8, 'relu')) #hidden layer
+    model.add(Dense(1, 'linear')) #output 
 
     model.summary()
 
     cp = ModelCheckpoint('model/', save_best_only=True) #makes model on folder model saving only prediction with less error 
     es = EarlyStopping(monitor = 'val_loss', patience = 20, verbose = 1) #uses checkpoint that stops once error starts increasing instead of decreasing after waiting for 20 epochs
 
-    model.compile(loss = MeanSquaredError(), optimizer=Adam(learning_rate=0.0001), metrics = [RootMeanSquaredError()]) #DO SOME WORK HERE
+    model.compile(loss = MeanSquaredError(), optimizer=Adam(learning_rate=0.0001), metrics = [RootMeanSquaredError()]) #minimizes mean squared error using adam optimization
     model.fit(X_train, y_train, validation_data=(X_val, y_val), epochs = 100, callbacks = [es, cp]) #runs for 100 epochs or less if error stops dropping 
 
 def check_prediction(X_train, y_train, X_val, y_val, X_test, y_test): 
@@ -60,6 +62,13 @@ def check_prediction(X_train, y_train, X_val, y_val, X_test, y_test):
     test_predictions = model1.predict(X_test).flatten()
     test_results = pd.DataFrame(data = {"Test Predictions":test_predictions, 'Actuals':y_test})
     print(test_results)
+
+    rmse = metrics.mean_squared_error(test_predictions, y_test)
+    rmse = math.sqrt(rmse)
+    print("Root mean squared error: ", rmse)
+
+    mae = metrics.mean_absolute_error(test_predictions, y_test)
+    print("Mean absolute error: ", mae)
     
 def make_prediction(): 
     '''Uses merged data to find already known non renewable energy requirements and predict future ones'''
@@ -96,8 +105,32 @@ def make_prediction():
     X_train, y_train = X[:train_len], y[:train_len]
     X_val, y_val = X[train_len:val_len+train_len], y[train_len:val_len+train_len]
     X_test, y_test = X[val_len+train_len:], y[val_len+train_len:]
-
     #make_model(X_train, y_train, X_val, y_val)
+
     check_prediction(X_train, y_train, X_val, y_val, X_test, y_test)
 
-make_prediction()
+def input_prediction(demands, renewables): 
+
+    differences = pd.DataFrame()
+    difs = []
+    data = []
+
+    for i in range(5): 
+        dif = float(demands[i]) - float(renewables[i])
+        difs.append(dif) 
+
+    differences.insert(0, 'Difference', difs)
+    npdf = differences.to_numpy()
+    data.append(npdf)
+    data = np.array(data)
+    print(data)
+
+    real_path = os.path.realpath(__file__)
+    dir_path = os.path.dirname(real_path)
+    os.chdir(dir_path)
+
+    model1 = load_model('model/')
+
+    prediction = model1.predict(data).flatten()
+    print(prediction)
+    return prediction

@@ -76,6 +76,7 @@ def merge_sources():
             day_df['Sums average'] = round(average, 1)
             renewable_cols = ['Solar', 'Wind', 'Geothermal', 'Biomass', 'Biogas', 'Small hydro', 'Large hydro', 'Batteries']
             day_df['Renewable sums'] = day_df[renewable_cols].sum(axis=1) #total renewable energy used per five minutes
+            day_df['Day sum'] = day_df['Sums'].sum() #total energy consumed in a day
 
             #used to create day, month and year columns
             #adds to list current day, month and year for each five minute record 
