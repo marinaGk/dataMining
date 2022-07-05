@@ -1,5 +1,6 @@
 '''just an attempt for starters'''
-
+import sys 
+import os
 from data_analysis.graphics.day_data import *
 from data_analysis.graphics.year_data import *
 from data_analysis.graphics.source_data import *
@@ -8,20 +9,12 @@ from data_analysis.graphics.import_data import *
 from data_analysis.graphics.functions import *
 from data_analysis.path import *
 from tkinter import *
-from tkinter import filedialog
-from tkinter.ttk import Combobox
-from numpy import size
 from tkcalendar import *
-import sys 
-import os
 import pandas as pd
-
 
 real_path = os.path.realpath(__file__)
 real_path = resolve_path(real_path)
 dir_path = os.path.dirname(real_path)
-# root_path = os.path.dirname(dir_path)
-# root_path = os.path.dirname(root_path)
 
 sys.path.append(dir_path)
 data_path = "{}\data".format(dir_path)
@@ -35,7 +28,6 @@ if os.path.exists("processed_demands.zip"):
     # Extract all the contents of zip file in current directory
         zipObj.extractall()
     os.remove("processed_demands.zip")
-
 
 os.chdir(dir_path)
 import neural_network
