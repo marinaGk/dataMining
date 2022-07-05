@@ -3,9 +3,7 @@
 
 ### Description 
 
-This application focuses on analyzing and making predictions based on energy consumption and production data. The data used to develop it come from information
-gathered about energy demands and sources in the State of California during the years 2019-2021. Data has been organized by source and information concerns both
-consumtption and production with sampling per five minutes. 
+This application focuses on analyzing and making predictions based on energy consumption and production data. The data used to develop it come from database on energy demands and sources for the State of California and during the years 2019-2021. Data has been organized by source with sampling per five minutes. 
 
 Data has been preprocessed to avoid abnormalities. With the use of a Graphics User Interface(GUI), the user is given the option to:
   
@@ -14,15 +12,11 @@ Data has been preprocessed to avoid abnormalities. With the use of a Graphics Us
   - get predictions of future requirements in non-renewable energy with the use of neural networks based on data 
   - import data that can be used to better train said network.
  
-Programming language used was Python since it allows for better data manipulation and visualization as well as easier creation and training of the neural 
-network. The later is an LSTM based RNN neural network made with the use of Keras, a python API specifically used to create neural networks and based on 
-python's Tensorflow library. For data organization two libraries were used, pandas that easily allows inserting data from the database and numpy that can be 
-used with Keras' functions. Finally, sklearn has been used were necessary to calculate error or to implement clustering algorithms for outlier search and data
-organization. 
+The programming language used was Python since it allows for better data manipulation and visualization, as well as easier creation and training of the neural network. The later is an LSTM based RNN neural network. It was made with the use of Keras, a python API specifically used to create neural networks, based on python's Tensorflow library. For data organization two libraries were used, pandas, that allows inserting data from database with ease and numpy, that can be used with Keras' functions. Finally, sklearn has been used where necessary to calculate error or to implement clustering algorithms for outlier search and data organization. 
 
 ### Installation 
 
-To install the application user is first required to have in their computer:
+To install the application, user is first required to have in their computer:
 
   - python 3.9.x or later version
   - tkinter and tkcalendar library
@@ -45,14 +39,14 @@ The app folder can be installed anywhere but it is necessary that the files insi
 
 ### Run 
 
-To run the main application, the user needs only run with python a file "gui.py" located on the app's root folder. To do that, from command line, with current directory set to app's root folder, user must type the command "python gui.py". 
+To run the main application, the user needs only run a file "gui.py" located on the app's root folder. To do that, from command line, with current directory set to app's root folder, user must type the command "python gui.py". 
 
 ### Use cases and examples
 
 1. Data visualization 
   
   - From GUI pick an option for data visualization : By day, By year, By source 
-  - By pressing on the Go button, a graphic appears on screen 
+  - By pressing the Go button, a graphic appears on screen 
   
   ![image](https://user-images.githubusercontent.com/45518985/177420818-c9025ad3-23ec-4fa7-80a8-c49d52772d90.png)
 
@@ -62,7 +56,7 @@ To run the main application, the user needs only run with python a file "gui.py"
   
 2. Outlier search 
 
-  - From GUI pick the "Outlier Finder" option and insert data in the required way 
+  - From GUI pick the "Outlier Finder" option and insert data as required
   - After some time a window will open on browser with appropriate data 
   
   ![image](https://user-images.githubusercontent.com/45518985/177421582-a9ecab06-0895-423f-8926-b119ee4dece6.png)
