@@ -29,7 +29,7 @@ class TestPrediction(unittest.TestCase):
     Methods
     -------
     test_input_prediction()
-        Tests output of `input_prediction` method on `input_prediction.py` module according to already known prediction output, according to model
+        Tests output of `input_prediction` method on `input_prediction.py` module according to already known prediction output from model
     test_subtraction()
         Tests output of subtraction method on `input_prediction.py` module according to already known value
     test_data_type()

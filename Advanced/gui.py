@@ -1,13 +1,12 @@
-'''just an attempt for starters'''
 import sys 
 import os
-from Advanced.data_analysis.graphics.day_data import *
-from Advanced.data_analysis.graphics.year_data import *
-from Advanced.data_analysis.graphics.source_data import *
-from Advanced.data_analysis.graphics.outlier_finder import *
-from Advanced.data_analysis.graphics.import_data import *
-from Advanced.data_analysis.graphics.functions import *
-from Advanced.data_analysis.path import *
+from data_analysis.graphics.day_data import *
+from data_analysis.graphics.year_data import *
+from data_analysis.graphics.source_data import *
+from data_analysis.graphics.outlier_finder import *
+from data_analysis.graphics.import_data import *
+from data_analysis.graphics.functions import *
+from data_analysis.path import *
 from tkinter import *
 from tkcalendar import *
 import pandas as pd
