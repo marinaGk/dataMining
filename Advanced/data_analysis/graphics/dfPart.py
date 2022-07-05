@@ -1,10 +1,12 @@
 import pandas as pd 
 import os
+from data_analysis.path import *
 
 def return_day(year, month, day): 
     '''Returns part of dataframe regarding requested date'''
 
     real_path = os.path.realpath(__file__) #file path
+    real_path = resolve_path(real_path)
     dir_path = os.path.dirname(real_path) #graphics path 
     dir_path = os.path.dirname(dir_path) #data_analysis path 
     root_path = os.path.dirname(dir_path) #root path

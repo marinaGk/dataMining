@@ -9,6 +9,7 @@ from sklearn.preprocessing import StandardScaler
 from collections import Counter
 from math import sqrt
 import plotly.express as px
+from data_analysis.path import *
 
 ##Here we find the days-outliers of our database. Days that their demand or supplement of energy is more or less than usual. Important 
 ##if we want to see if there are wrong data in a day. 
@@ -22,6 +23,7 @@ def find_outliers(array):
     
 
     real_path = os.path.realpath(__file__)
+    real_path = resolve_path(real_path)
     dir_path = os.path.dirname(real_path)
     dir_path = os.path.dirname(dir_path)
     root_path = os.path.dirname(dir_path)

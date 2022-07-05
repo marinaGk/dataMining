@@ -6,6 +6,7 @@ from data_analysis.graphics.source_data import *
 from data_analysis.graphics.outlier_finder import *
 from data_analysis.graphics.import_data import *
 from data_analysis.graphics.functions import *
+from data_analysis.path import *
 from tkinter import *
 from tkinter import filedialog
 from tkinter.ttk import Combobox
@@ -16,6 +17,7 @@ import os
 import pandas as pd
 
 real_path = os.path.realpath(__file__)
+real_path = resolve_path(real_path)
 dir_path = os.path.dirname(real_path)
 # root_path = os.path.dirname(dir_path)
 # root_path = os.path.dirname(root_path)
@@ -96,12 +98,12 @@ class Application(Tk):
             for item in self.dataButtonCanvas.winfo_children():
                 item.destroy()
 
-        self.data.set("Pick the hours in between you want to find outliers (entries have to be type of xx:00)")
+        self.data.set("Pick outlier search hours(entries have to be type of xx:00)")
         print("Get Outliers")
-        self.Label1 = Label(self.dataButtonCanvas,text="Put Start Hour(xx:00)",background = 'pink').grid(row=1,column=1)
+        self.Label1 = Label(self.dataButtonCanvas,text="Inster start hour(xx:00)",background = 'pink').grid(row=1,column=1)
         self.entry1= Entry(self.dataButtonCanvas)
         self.entry1.grid(row=2,column=1)
-        self.Label2 = Label(self.dataButtonCanvas,text="Put End Hour(xx:00)",background = 'pink').grid(row=1,column=2)
+        self.Label2 = Label(self.dataButtonCanvas,text="Insert end hour(xx:00)",background = 'pink').grid(row=1,column=2)
         self.entry2= Entry(self.dataButtonCanvas)
         self.entry2.grid(row=2,column=2)
 

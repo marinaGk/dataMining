@@ -4,8 +4,10 @@ from os import X_OK, listdir
 from os.path import isfile, join
 import numpy as np
 import sys
+from data_analysis.path import *
 
 real_path = os.path.realpath(__file__)
+real_path = resolve_path(real_path)
 dir_path = os.path.dirname(real_path)
 root_path = os.path.dirname(dir_path)
 root_path = os.path.dirname(root_path)

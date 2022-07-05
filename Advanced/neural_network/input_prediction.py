@@ -2,6 +2,7 @@ import os
 import numpy as np
 import pandas as pd
 from keras.models import load_model
+from data_analysis.path import *
 
 def subtraction(demands, renewables): 
     
@@ -32,6 +33,7 @@ def input_prediction(demands, renewables):
     data = convert_data_types(difs)
 
     real_path = os.path.realpath(__file__)
+    real_path = resolve_path(real_path)
     dir_path = os.path.dirname(real_path)
     os.chdir(dir_path)
 

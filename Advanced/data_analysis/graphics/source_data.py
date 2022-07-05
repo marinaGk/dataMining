@@ -3,6 +3,7 @@ from numpy import size
 import pandas as pd 
 import os
 import numpy as np
+from data_analysis.path import *
 
 def returns_stats(array): 
 
@@ -20,6 +21,7 @@ def source_per_day(source_index):
     # dir_path = os.path.dirname(real_path)
     
     real_path = os.path.realpath(__file__)
+    real_path = resolve_path(real_path)
     dir_path = os.path.dirname(real_path)
     dir_path = os.path.dirname(dir_path)
     root_path = os.path.dirname(dir_path)
@@ -66,7 +68,5 @@ def source_per_day(source_index):
         if i not in visible: 
             tick.set_visible(False)
 
-    mng = plt.get_current_fig_manager()
-    mng.window.state('zoomed')
     plt.show()
 
