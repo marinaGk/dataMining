@@ -11,6 +11,21 @@ from tkinter import filedialog
 from tkinter.ttk import Combobox
 from numpy import size
 from tkcalendar import *
+import sys 
+import os
+
+
+real_path = os.path.realpath(__file__)
+dir_path = os.path.dirname(real_path)
+root_path = os.path.dirname(dir_path)
+root_path = os.path.dirname(root_path)
+sys.path.append(root_path)
+
+import neural_network
+from neural_network.RestAPI import *
+# from neural_network.input_pred import *
+
+os.chdir(dir_path)
 
 class Application(Tk): 
 
@@ -57,6 +72,11 @@ class Application(Tk):
             self.new_path = data_new
             find_outliers(self.new_path)
 
+    def func4(self):
+        app = create_app()
+        app.run()
+        self.destroy()
+
     def func5(self):
         '''Calls functions to import new data'''
         
@@ -85,14 +105,7 @@ class Application(Tk):
 
         self.goButton = Button(self.dataButtonCanvas, text = "Go", font = 'sans-serif', command = self.func3)
         self.goButton.grid(row = 2, column = 3)
-
-    def makePredictionButton(self):
-        if(len(self.dataButtonCanvas.winfo_children())>0):
-            for item in self.dataButtonCanvas.winfo_children():
-                item.destroy()
-        print("Prediction of energy sources")
-        self.Label1 = Label(self.dataButtonCanvas,text="Redirect to localhost",background = 'pink').grid(row=1,column=1)
-
+    
     def makeImportButton(self):
         if(len(self.dataButtonCanvas.winfo_children())>0):
             for item in self.dataButtonCanvas.winfo_children():
@@ -171,7 +184,7 @@ class Application(Tk):
         button4 = Button(xaxisCanvas, width = 10, text = 'Outlier finder', font = 'sans-serif', command = self.makeOutlierButton)
         button4.grid(row = 4, column = 0, sticky = 'w', padx = (0, 30))
 
-        button5 = Button(xaxisCanvas, width = 15, text = "Predictor of energy", font = 'sans-serif', command =  self.makePredictionButton)
+        button5 = Button(xaxisCanvas, width = 15, text = "Predictor of energy", font = 'sans-serif', command =self.func4)
         button5.grid(row = 4, column = 1)
 
         button6 = Button(xaxisCanvas, width = 10, text = "Import data", font = 'sans-serif', command = self.makeImportButton)
