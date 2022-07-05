@@ -1,16 +1,20 @@
 import pandas as pd 
 import os
 
+directory=os.getcwd()
+os.chdir(directory)
+
+
 def merge_sources(): 
     '''Merges all source files into one, required to make data processing faster'''
     
-    real_path = os.path.realpath(__file__) #file path
-    dir_path = os.path.dirname(real_path) #preprocessing path 
-    dir_path = os.path.dirname(dir_path) #data_analysis path 
-    root_path = os.path.dirname(dir_path) #root path 
- 
-    data_path = "{}\data".format(root_path) #works in data
-    source_path = "{}\sources".format(data_path) #works in sources 
+    real_path = os.path.realpath(__file__)
+    dir_path = os.path.dirname(real_path)
+    dir_path = os.path.dirname(dir_path)
+    root_path = os.path.dirname(dir_path)
+
+    data_path = "{}\data".format(root_path)
+    source_path = "{}\sources".format(data_path)
     os.chdir(source_path) 
 
     filelist = []
@@ -25,11 +29,11 @@ def merge_sources():
     time_df = pd.read_csv(source_path + "/20190101.csv") #reads sample times from one of the files 
     time = time_df['Time'].tolist()
 
-    for filename in os.listdir(source_path): #for each file in sources dir 
+    for filename in os.listdir(source_path):
 
-        file = source_path + "/" + filename #gets name of file 
- 
-        if ((os.stat(file).st_size == 0) == False): #checks if file is empty
+        file = source_path + "/" + filename
+
+        if ((os.stat(file).st_size == 0) == False):
 
             day_df = pd.read_csv(file)
 
@@ -95,6 +99,8 @@ def merge_sources():
     df.insert(1, 'Month', months) #adds month column 
     df.insert(2, 'Year', years) #adds year column
     
-    new_path = data_path + "\\merged_source_files.csv" #saves in data
+    new_path = data_path + "\\merged_source_files.csv"
     df.info()
     df.to_csv(new_path, index=False)
+
+# merge_sources()
