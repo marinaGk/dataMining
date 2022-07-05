@@ -25,7 +25,7 @@ organization.
 To install the application user is first required to have in their computer:
 
   - python 3.9.x or later version
-  - tkinter library & tkcalendar library
+  - tkinter and tkcalendar library
   - matplotlib library 
   - plotly library
   - pandas library 
@@ -38,6 +38,51 @@ To install the application user is first required to have in their computer:
 
 To run tests, requirements are: 
   
-  -unittest library 
-  -pytest library
+  - unittest library 
+  - pytest library
+
+The app folder can be installed anywhere but it is necessary that the files inside stay in their current formation.
+
+### Run 
+
+To run the main application, the user needs only run with python a file "gui.py" located on the app's root folder. To do that, from command line, with current directory set to app's root folder, user must type the command "python gui.py". 
+
+### Use cases and examples
+
+1. Data visualization 
   
+  - From GUI pick an option for data visualization : By day, By year, By source 
+  - By pressing on the Go button, a graphic appears on screen 
+  
+  ![image](https://user-images.githubusercontent.com/45518985/177420818-c9025ad3-23ec-4fa7-80a8-c49d52772d90.png)
+
+  ![image](https://user-images.githubusercontent.com/45518985/177420931-b6f24310-f986-4468-9b1d-21d25d09943e.png)
+
+  (Here we see an example of a graph for day consumption on a date determined by the user) 
+  
+2. Outlier search 
+
+  - From GUI pick the "Outlier Finder" option and insert data in the required way 
+  - After some time a window will open on browser with appropriate data 
+  
+  ![image](https://user-images.githubusercontent.com/45518985/177421582-a9ecab06-0895-423f-8926-b119ee4dece6.png)
+  
+  ![image](https://user-images.githubusercontent.com/45518985/177421659-4e9dab27-b1e0-4ac0-8cbb-c6250dbb275b.png)
+
+3. Predictor 
+  
+  - From GUI pick the "Predictor" option 
+  - GUI window closes
+  - On browser search bar type localhost:5000/ to be taken to web app 
+  - Insert data and submit to get prediction 
+  
+4. Data import 
+
+### Credits 
+
+Katoikos Ioannis 
+gitHub: GiannisKat123
+
+Gkioka Marina 
+gitHub: marinaGk
+
