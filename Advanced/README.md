@@ -78,6 +78,20 @@ To run the main application, the user needs only run with python a file "gui.py"
   
 4. Data import 
 
+### Testing 
+
+1. GIANNH
+
+2. Web application POST test
+
+  - Located in file "test_requests.py" in folder api_test of tests.
+  - To run from command line, inside its directory, type "pytest test_requests.py".
+
+3. Predictor test
+
+  - Located in file "test_prediction.py" of tests. 
+  - To run from command line, inside its directory, type "python predictor_test.py".
+
 ### Credits 
 
 Katoikos Ioannis 
