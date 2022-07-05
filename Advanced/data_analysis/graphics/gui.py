@@ -14,7 +14,6 @@ from tkcalendar import *
 import sys 
 import os
 
-
 real_path = os.path.realpath(__file__)
 dir_path = os.path.dirname(real_path)
 root_path = os.path.dirname(dir_path)
@@ -23,7 +22,6 @@ sys.path.append(root_path)
 
 import neural_network
 from neural_network.RestAPI import *
-# from neural_network.input_pred import *
 
 os.chdir(dir_path)
 
