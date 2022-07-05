@@ -50,18 +50,37 @@ To run the main application, the user needs only run a file "gui.py" located on 
   
   ![image](https://user-images.githubusercontent.com/45518985/177420818-c9025ad3-23ec-4fa7-80a8-c49d52772d90.png)
 
-  ![image](https://user-images.githubusercontent.com/45518985/177420931-b6f24310-f986-4468-9b1d-21d25d09943e.png)
+  ![Energy_by_day_consumption](https://user-images.githubusercontent.com/97844048/177426285-94a4eaf2-94d6-40ba-baea-3a82793b4de4.png)
+
 
   (Here we see an example of a graph for day consumption on a date determined by the user) 
   
 2. Outlier search 
 
-  - From GUI pick the "Outlier Finder" option and insert data as required
+  - From GUI pick the "Outlier Finder" option and insert data in the required way 
   - After some time a window will open on browser with appropriate data 
   
   ![image](https://user-images.githubusercontent.com/45518985/177421582-a9ecab06-0895-423f-8926-b119ee4dece6.png)
   
   ![image](https://user-images.githubusercontent.com/45518985/177421659-4e9dab27-b1e0-4ac0-8cbb-c6250dbb275b.png)
+
+  - Following that, the console will promt the user to input the following:
+  
+  ![Στιγμιότυπο οθόνης 2022-07-06 010642](https://user-images.githubusercontent.com/97844048/177425047-3682b6ed-c1be-4346-9312-db59aa38a816.png)
+
+  Those values are important for the clustering in order to outliers with the DBSCAN Algorithm. For more information on that, we insist you to see the following
+  links:
+  
+    - https://en.wikipedia.org/wiki/DBSCAN
+    - https://en.wikipedia.org/wiki/Cluster_analysis
+  
+  An example of this process is showed below:
+  
+  ![Στιγμιότυπο οθόνης 2022-07-06 005254](https://user-images.githubusercontent.com/97844048/177425809-0c96148f-584f-4055-bccd-67d1a420ddb0.png)
+
+  ![Στιγμιότυπο οθόνης 2022-07-06 005310](https://user-images.githubusercontent.com/97844048/177425829-d4e723fd-01c4-4dc6-be6b-ec1fe5525f81.png)
+
+  If the user is not interested on that, just type a letter on every input and you will be able to use the gui again.
 
 3. Predictor 
   
@@ -70,11 +89,27 @@ To run the main application, the user needs only run a file "gui.py" located on 
   - On browser search bar type localhost:5000/ to be taken to web app 
   - Insert data and submit to get prediction 
   
+  ![Στιγμιότυπο οθόνης 2022-07-06 005059](https://user-images.githubusercontent.com/97844048/177426005-75c3a4be-075a-4479-8461-9057f18d4d84.png)
+
+  ![Στιγμιότυπο οθόνης 2022-07-06 005123](https://user-images.githubusercontent.com/97844048/177426013-90a22737-923d-4192-b593-1b8a3dacd32d.png)
+
+  
 4. Data import 
+
+  - From GUI pick the "Import data" option
+  - In order for that to work, user is required to have put in the new_data folder of the folder data of the project on both sources and demands 
+    folders in the compatible form
+  
+  ![Στιγμιότυπο οθόνης 2022-07-06 012121](https://user-images.githubusercontent.com/97844048/177426822-68a3af52-9c0b-4a3c-abdd-ea03bf280397.png)
+
+
 
 ### Testing 
 
-1. GIANNH
+1. Test of user's inputs
+
+  - Located in file "test_code.py" in folder tests.
+  - To run from command line, inside its directory, type "python test_code.py"
 
 2. Web application POST test
 
