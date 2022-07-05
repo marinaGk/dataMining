@@ -12,7 +12,6 @@ from tkinter.ttk import Combobox
 from numpy import size
 from tkcalendar import *
 
-
 class Application(Tk): 
 
     def func(self): 
@@ -92,8 +91,8 @@ class Application(Tk):
             for item in self.dataButtonCanvas.winfo_children():
                 item.destroy()
         print("Prediction of energy sources")
-        self.Label1 = Label(self.dataButtonCanvas,text="You can use it in your localhost!!!",background = 'pink').grid(row=1,column=1)
-    
+        self.Label1 = Label(self.dataButtonCanvas,text="Redirect to localhost",background = 'pink').grid(row=1,column=1)
+
     def makeImportButton(self):
         if(len(self.dataButtonCanvas.winfo_children())>0):
             for item in self.dataButtonCanvas.winfo_children():
@@ -213,7 +212,7 @@ class Application(Tk):
         super().__init__()
         self.geometry("500x300+700+300")
         self.resizable(False, False)
-        self.title("an attempt")
+        self.title("I can't believe I actually let it have this title for so long")
         self.configure(bg = 'pink')
         self.rowconfigure(0, weight = 1)
         self.rowconfigure(1, weight = 1)

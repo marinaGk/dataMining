@@ -14,9 +14,6 @@ from data_analysis.graphics.functions import *
 
 os.chdir(dir_path)
 
-
-###Some unittesting 
-
 class TestGetTime(unittest.TestCase):
     def runTest(self):
         self.assertEqual(checkTime("10:00"),"10:00","Wrong Input")
