@@ -1,35 +1,37 @@
+'''
+Here we preprocessing the data of the folders sources and demands, so that the data of energy sources and demands are ready for analysis. The preprocessed data are 
+saved in the processed_sources and processed_demands respectively and they are used for finding outliers 
+
+Requires python's numpy,pandas,os libraries
+
+'''
+
+
 import pandas as pd
 from os import X_OK, listdir
 from os.path import isfile, join
 import os
-import random
 import numpy as np
 
-
-
-##Προεπεξεργασία των Δεδομένων. Εδώ επεξεργαζόμαστε τα δεδομένα μας ώστε σε κάθε αρχείο excel που βρίσκεται στους φακέλους sources και demands που μας δίνονται
-##να έχει τον ίδιο αριθμό δεδομενών (288). Σε περίπτωση που ένα αρχείο έχει παραπάνω δεδομένα, τα διαγράφουμε. Αν σε ένα αρχείο λείπουν δεδομένα, φροντίζουμε ώστε
-##ώστε να μην χαλάει η ροή των δεδομένων, βάζοντας ως τιμές σε αυτά τις τιμές του προηγούμενου στιγμιοτύπου. Μέρες που δεν έχουν δεδομένα δεν τις λαμβάνουμε υπόψη(πχ 2019-02-28).
-##Τέλος, αφού κάνουμε την προεπεξεργασία, φτιάχνουμε νέους φακέλους processed_sources και processed_demands στους οποίους και βάζουμε τα επεξεργασμένα αρχεία των sources και demands
-##αντίστοιχα που φτιάξαμε.Τα αρχεία αυτά υπάρχουν έτοιμα στο data.zip. 
-
 print("SOURCES")
-real_path = os.path.realpath(__file__)
+real_path = os.path.realpath(__file__)##path of the current file
 dir_path = os.path.dirname(real_path)
 dir_path = os.path.dirname(dir_path)
-root_path = os.path.dirname(dir_path)
-mypath="{}\data\sources".format(root_path)
+root_path = os.path.dirname(dir_path)##path of the project
+mypath="{}\data\sources".format(root_path)##access to the sources folder of the data folder of the project
 os.chdir(mypath)
 
-df=pd.read_csv("20190101.csv")
-time=df["Time"]
+df=pd.read_csv("20190101.csv")##reading one of the files
+time=df["Time"]##array of timestamps
 
-sourcesfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
+sourcesfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]##get list of files from sources
 
-sources_headers = ["Time","Solar","Wind","Geothermal","Biomass","Biogas","Small hydro","Coal","Nuclear","Natural gas","Large hydro","Batteries","Imports","Other"]
+sources_headers = ["Time","Solar","Wind","Geothermal","Biomass","Biogas","Small hydro","Coal","Nuclear","Natural gas","Large hydro","Batteries","Imports","Other"]##prototype columns for a source file
 
-
-for x in range(len(sourcesfiles)):
+for x in range(len(sourcesfiles)):#for every file in the sources folder
+    ##We do some preprocessing.
+    ##-If the number of the data are over 288, we delete the last data until we have 288
+    ##-If data are missing, we add data from the previous timestamp that has data
    try:
        mypath="{}\data\sources".format(root_path)
        os.chdir(mypath)
@@ -60,19 +62,22 @@ for x in range(len(sourcesfiles)):
        os.chdir(mypath) 
        new_csv = pd.DataFrame(list_tuples)
        new_csv.columns = sources_headers
-       new_csv.to_csv("new_{}.csv".format(sourcesfiles[x][0:8]), index=False, encoding='utf-8-sig')
+       new_csv.to_csv("new_{}.csv".format(sourcesfiles[x][0:8]), index=False, encoding='utf-8-sig')##The preprocessed file is saved in the processed_sources folder of data
    except:
        continue
 
 print("DEMANDS")
-mypath="{}\data\demand".format(root_path)
+mypath="{}\data\demand".format(root_path)##access to the demands folder of the data folder of the project
 os.chdir(mypath)
 
-demandfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
+demandfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]##get list of files from demands
 
-demands_headers = ["Time","Day ahead forecast","Hour ahead forecast","Current demand"]
+demands_headers = ["Time","Day ahead forecast","Hour ahead forecast","Current demand"]##prototype columns for a source file
 
-for x in range(len(demandfiles)):
+for x in range(len(demandfiles)):#for every file in the demand folder
+    ##We do some preprocessing.
+    ##-If the number of the data are over 288, we delete the last data until we have 288
+    ##-If data are missing, we add data from the previous timestamp that has data
    try:
        mypath="{}\data\demand".format(root_path)
        os.chdir(mypath)
@@ -103,7 +108,7 @@ for x in range(len(demandfiles)):
        os.chdir(mypath)
        new_csv = pd.DataFrame(list_tuples)
        new_csv.columns = demands_headers
-       new_csv.to_csv( "new_{}.csv".format(demandfiles[x][0:8]), index=False, encoding='utf-8-sig')
+       new_csv.to_csv( "new_{}.csv".format(demandfiles[x][0:8]), index=False, encoding='utf-8-sig')##The preprocessed file is saved in the processed_demands folder of data
    except:
        continue
 
