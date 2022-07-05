@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import pandas as pd
-from dfPart import * 
-from day_data import *
+from data_analysis.graphics.dfPart import * 
+from data_analysis.graphics.day_data import *
 
 def energy_per_year(year):
     '''Creates graph of energy used during specified year'''

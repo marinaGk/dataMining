@@ -1,7 +1,7 @@
 import unittest
 
-from functions import *
-from day_data import *
+from data_analysis.graphics.functions import *
+from data_analysis.graphics.day_data import *
 
 ###Some unittesting 
 

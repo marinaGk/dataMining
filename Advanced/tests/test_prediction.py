@@ -1,9 +1,7 @@
 import unittest
-from more_itertools import difference
 import numpy as np
 import sys 
 import os
-
 
 real_path = os.path.realpath(__file__)
 dir_path = os.path.dirname(real_path)

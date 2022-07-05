@@ -17,15 +17,15 @@ import pandas as pd
 
 real_path = os.path.realpath(__file__)
 dir_path = os.path.dirname(real_path)
-root_path = os.path.dirname(dir_path)
-root_path = os.path.dirname(root_path)
+# root_path = os.path.dirname(dir_path)
+# root_path = os.path.dirname(root_path)
 
-sys.path.append(root_path)
-data_path = "{}\data".format(root_path)
+sys.path.append(dir_path)
+data_path = "{}\data".format(dir_path)
 os.chdir(data_path)
 df = pd.read_csv("merged_files.csv")
 
-os.chdir(root_path)
+os.chdir(dir_path)
 import neural_network
 from neural_network.RestAPI import *
 
