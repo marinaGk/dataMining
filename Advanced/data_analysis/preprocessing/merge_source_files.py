@@ -1,9 +1,11 @@
+'''
+Merges all source files into one and creates necessary columns in DataFrame to speed later processes up. 
+
+Requires `pandas` for data manipulation and `os` for path manipulation.
+'''
+
 import pandas as pd 
 import os
-
-directory=os.getcwd()
-os.chdir(directory)
-
 
 def merge_sources(): 
     '''Merges all source files into one, required to make data processing faster'''
@@ -103,4 +105,3 @@ def merge_sources():
     df.info()
     df.to_csv(new_path, index=False)
 
-# merge_sources()

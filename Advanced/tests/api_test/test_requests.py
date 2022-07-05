@@ -1,5 +1,12 @@
-import pytest
+'''
+Tests `RestAPI.py` module. 
 
+Requires `pytest` library to make tests, 
+`sys` and `os` libraries to manipulate paths and 
+`create_app` method of `RestAPI` module on `neural_network` package. 
+'''
+
+import pytest
 import os 
 import sys 
 
@@ -16,7 +23,8 @@ from neural_network.RestAPI import create_app
 os.chdir(dir_path)
 
 def test_response():
-
+    '''Tests response to POST HTTP method on app made by `RestAPI` module'''
+    
     app = create_app()
     with app.test_client() as client:  
         response = client.post("/form", data = {

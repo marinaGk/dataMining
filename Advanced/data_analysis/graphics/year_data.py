@@ -1,10 +1,27 @@
+'''
+Prepares data and makes graph of energy consumption on specified year. 
+
+Can be imported as module. 
+
+Requires `matplotlib` to make graph, 
+`pandas` to manipulate data, 
+`dfPart` and `day_data` from `data_analysis.graphics` package to get data for graph. 
+'''
+
 import matplotlib.pyplot as plt
 import pandas as pd
 from data_analysis.graphics.dfPart import * 
 from data_analysis.graphics.day_data import *
 
 def energy_per_year(year):
-    '''Creates graph of energy used during specified year'''
+    '''
+    Creates graph of energy used during specified year
+
+    Parameters
+    ----------
+    year: string 
+        Year - whose graph is required - as string 
+    '''
 
     x = []
     visible = [] #keeps indices of visible ticks
@@ -51,8 +68,5 @@ def energy_per_year(year):
     for i, tick in enumerate(ax.get_xticklabels()): #only shows dates at beggining of month 
         if i not in visible: 
             tick.set_visible(False)
-
-    mng = plt.get_current_fig_manager() #makes figure full screen
-    #mng.window.state('zoomed')
 
     plt.show()

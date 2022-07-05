@@ -1,8 +1,11 @@
+'''
+Merges all demand files into one and creates necessary columns in DataFrame to speed later processes up. 
+
+Requires `pandas` for data manipulation and `os` for path manipulation.
+'''
+
 import pandas as pd 
 import os
-
-directory=os.getcwd()
-os.chdir(directory)
 
 def merge_demands(): 
     '''Merges all demand files into one, required to make data processing faster'''
@@ -71,6 +74,4 @@ def merge_demands():
     df.info()
     new_path = data_path + "\\merged_demand_files.csv"
     df.to_csv(new_path, index=False)
-
-# merge_demands()
 
