@@ -1,4 +1,5 @@
 import os
+import pandas as pd
 directory=os.getcwd()
 
 ##Function for checking if the Time is valid for the "outlier finder" feature
@@ -53,5 +54,8 @@ def checkFileName(filename):
             return None
 
 
-
+def Years(file):
+    years = file["Year"]
+    years = pd.unique(years)
+    return years
 

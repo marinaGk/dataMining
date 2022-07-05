@@ -13,13 +13,19 @@ from numpy import size
 from tkcalendar import *
 import sys 
 import os
+import pandas as pd
 
 real_path = os.path.realpath(__file__)
 dir_path = os.path.dirname(real_path)
 root_path = os.path.dirname(dir_path)
 root_path = os.path.dirname(root_path)
-sys.path.append(root_path)
 
+sys.path.append(root_path)
+data_path = "{}\data".format(root_path)
+os.chdir(data_path)
+df = pd.read_csv("merged_files.csv")
+
+os.chdir(root_path)
 import neural_network
 from neural_network.RestAPI import *
 
@@ -138,7 +144,8 @@ class Application(Tk):
         print("Get Graph by year")
         self.data.set("Pick a year")
 
-        options = ["2019", "2020", "2021","2022"]
+        options = Years(df)
+
         self.button = OptionMenu(self.dataButtonCanvas, self.data, *options)
         self.button.grid(row = 2, column = 0)
 
@@ -223,7 +230,7 @@ class Application(Tk):
         super().__init__()
         self.geometry("500x300+700+300")
         self.resizable(False, False)
-        self.title("I can't believe I actually let it have this title for so long")
+        self.title("Energy Data")
         self.configure(bg = 'pink')
         self.rowconfigure(0, weight = 1)
         self.rowconfigure(1, weight = 1)
