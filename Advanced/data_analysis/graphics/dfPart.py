@@ -1,9 +1,6 @@
 import pandas as pd 
 import os
 
-directory=os.getcwd()
-os.chdir(directory)
-
 def return_day(year, month, day): 
     '''Returns part of dataframe regarding requested date'''
 

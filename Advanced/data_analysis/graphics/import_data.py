@@ -4,7 +4,6 @@ from os import X_OK, listdir
 from os.path import isfile, join
 import numpy as np
 
-
 ##Inserting a file into the database, means also that you already have a file for demands and soucres in the new_data folder with the same name <date>.csv.
 ##If these files are there and valid, we do some preprocessing and we insert the new data in the database.
 
@@ -125,9 +124,7 @@ def insertfiles(filename):
 
     else: 
         print("Something went wrong! The files that you are trying to import are arleady in the database or you don't have files for a day in sources and demands of the new_data folder")
-
-    
-    
+  
 def merge_sources(): 
     '''Merges all source files into one, required to make data processing faster'''
     
@@ -226,8 +223,6 @@ def merge_sources():
     df.info()
     df.to_csv(new_path, index=False)
 
-
-
 def merge_demands(): 
     '''Merges all demand files into one, required to make data processing faster'''
     
@@ -295,7 +290,6 @@ def merge_demands():
     df.info()
     new_path = data_path + "\\merged_demand_files.csv"
     df.to_csv(new_path, index=False)
-
 
 def data_merge(): 
     '''Makes file containing both sources and demands records'''

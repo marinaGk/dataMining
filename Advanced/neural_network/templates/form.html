@@ -13,44 +13,44 @@
 
         <div class = "per_five_input" style = "margin : auto; display: flex; flex-direction: row; padding: 10px;"> 
             <label for = "demand1"> Current demand</label>
-            <input name = "demand1" type = "number" required>
+            <input name = "demand1" type = "number" min = "0" required>
             <label for = "renewable1"> Renewable production </label>
-            <input name = "renewable1" type = "number" required> 
+            <input name = "renewable1" type = "number" min = "0" required> 
         </div>
 
         <div class = "per_five_input" style = "margin : auto; display: flex; flex-direction: row; padding: 10px;"> 
             <label for = "demand2"> Current demand</label>
-            <input name = "demand2" type = "number" required>
+            <input name = "demand2" type = "number" min = "0" required>
             <label for = "renewable2"> Renewable production </label>
-            <input name = "renewable2" type = "number" required> 
+            <input name = "renewable2" type = "number" min = "0" required> 
         </div>
 
         <div class = "per_five_input" style = "margin : auto; display: flex; flex-direction: row; padding: 10px;"> 
             <label for = "demand3"> Current demand</label>
-            <input name = "demand3" type = "number" required>
+            <input name = "demand3" type = "number" min = "0" required>
             <label for = "renewable3"> Renewable production </label>
-            <input name = "renewable3" type = "number" required> 
+            <input name = "renewable3" type = "number" min = "0" required> 
         </div>
 
         <div class = "per_five_input" style = "margin : auto; display: flex; flex-direction: row; padding: 10px;"> 
             <label for = "demand4"> Current demand</label>
-            <input name = "demand4" type = "number" required>
+            <input name = "demand4" type = "number" min = "0" required>
             <label for = "renewable4"> Renewable production </label>
-            <input name = "renewable4" type = "number" required> 
+            <input name = "renewable4" type = "number" min = "0" required> 
         </div>
 
         <div class = "per_five_input" style = "margin : auto; display: flex; flex-direction: row; padding: 10px;"> 
             <label for = "demand5"> Current demand</label>
-            <input name = "demand5" type = "number" required>
+            <input name = "demand5" type = "number" min = "0" required>
             <label for = "renewable5"> Renewable production </label>
-            <input name = "renewable5" type = "number" required> 
+            <input name = "renewable5" type = "number" min = "0" required> 
         </div>
 
         <input type = "submit" value = "Submit" style = "margin: auto;"/>
     </form>
     
-    <div class = 'prediction'> 
-        Predicted non-renewable energy requirement is: {{prediction}}
+    <div class = 'prediction' style = "display: flex; flex-direction: row; padding-top: 30px;"> 
+        <p style = "margin: auto; ">Predicted non-renewable energy requirement is: {{prediction}}</p>
     </div>
 </body>
 </html>

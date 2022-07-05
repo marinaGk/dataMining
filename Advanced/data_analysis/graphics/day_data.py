@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 from numpy import size
-from dfPart import * 
-from day_data import *
+from data_analysis.graphics.dfPart import * 
+from data_analysis.graphics.day_data import *
 
 def energy_per_day(year, month, day): 
     '''Creates graph of energy used during specified date'''

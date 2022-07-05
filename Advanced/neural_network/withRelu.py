@@ -116,29 +116,3 @@ def make_prediction():
     make_model(X_train, y_train, X_val, y_val)
 
     check_prediction(X_train, y_train, X_val, y_val, X_test, y_test)
-
-# def input_prediction(demands, renewables): 
-
-#     differences = pd.DataFrame()
-#     difs = []
-#     data = []
-
-#     for i in range(5): 
-#         dif = float(demands[i]) - float(renewables[i])
-#         difs.append(dif) 
-
-#     differences.insert(0, 'Difference', difs)
-#     npdf = differences.to_numpy()
-#     data.append(npdf)
-#     data = np.array(data)
-#     print(data)
-
-#     real_path = os.path.realpath(__file__)
-#     dir_path = os.path.dirname(real_path)
-#     os.chdir(dir_path)
-
-#     model1 = load_model('model/')
-
-#     prediction = model1.predict(data).flatten()
-
-#     return prediction
