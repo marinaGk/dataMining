@@ -1,9 +1,9 @@
 from flask import Flask, jsonify, render_template, request
-from input_prediction import input_prediction
+# from input_prediction import input_prediction
+from neural_network.input_prediction import input_prediction
 
 def create_app(): 
     app = Flask(__name__)
-
 
     @app.route("/")
     def input_form(): 
