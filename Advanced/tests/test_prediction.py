@@ -1,3 +1,11 @@
+'''
+Tests `input prediction.py` module. 
+
+Requires `unittest` library to make tests, 
+`numpy` library to manipulate data, 
+`sys` and `os` libraries to manipulate paths.
+'''
+
 import unittest
 import numpy as np
 import sys 
@@ -15,6 +23,18 @@ from neural_network.input_prediction import *
 os.chdir(dir_path)
 
 class TestPrediction(unittest.TestCase): 
+    '''
+    Class used to unit test `input_prediction.py` module
+
+    Methods
+    -------
+    test_input_prediction()
+        Tests output of `input_prediction` method on `input_prediction.py` module according to already known prediction output, according to model
+    test_subtraction()
+        Tests output of subtraction method on `input_prediction.py` module according to already known value
+    test_data_type()
+        Tests type of data returned by `convert_data_types` method on `input_prediction.py` module according to already known shape
+    '''
 
     demands = [['22216.'],['22106.'],['22130.'],['22040.'],['21963.']]
     demands = np.array(demands)
@@ -24,6 +44,7 @@ class TestPrediction(unittest.TestCase):
     difs = []
 
     def test_input_prediction(self): 
+        '''Tests output of `input_prediction` method on `input_prediction.py` module according to already known prediction output, according to model'''
 
         prediction = input_prediction(self.demands, self.renewables)
         prediction = round(prediction[0], 1)
@@ -31,6 +52,7 @@ class TestPrediction(unittest.TestCase):
         self.assertEqual(prediction, 15564.0)
 
     def test_subtraction(self): 
+        '''Tests output of `subtraction` method on `input_prediction.py` module according to already known value'''
 
         self.difs = subtraction(self.demands, self.renewables)
         correctDifs = [15678.,15512.,15500.,15471.,15391.]
@@ -38,6 +60,7 @@ class TestPrediction(unittest.TestCase):
         self.assertEqual(self.difs, correctDifs)
 
     def test_data_type(self): 
+        '''Tests type of data returned by `convert_data_types` method on `input_prediction.py` module according to already known shape'''
 
         differences = convert_data_types(self.difs)
 

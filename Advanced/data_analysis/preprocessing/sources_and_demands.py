@@ -1,8 +1,11 @@
+'''
+Merges all source and demand files into one and creates necessary columns in DataFrame to speed later processes up. 
+
+Requires `pandas` for data manipulation and `os` for path manipulation.
+'''
+
 import os
 import pandas as pd
-
-directory=os.getcwd()
-os.chdir(directory)
 
 def data_merge(): 
     '''Makes file containing both sources and demands records'''
@@ -30,4 +33,3 @@ def data_merge():
     sources_df.info()
     sources_df.to_csv(new_path, index=False)
 
-# data_merge()

@@ -3,7 +3,23 @@ import os
 from data_analysis.path import *
 
 def return_day(year, month, day): 
-    '''Returns part of dataframe regarding requested date'''
+    '''
+    Returns part of dataframe regarding requested date
+    
+    Parameters
+    ---------- 
+    year: string 
+        Year - of date whose graph is required - as string 
+    month: string 
+        Number of month - of date whose graph is required - as string 
+    day: string 
+        Number of day - of date whose graph is required - as strings
+    
+    Returns
+    -------
+    pandas DataFrame
+        Part of DataFrame containing data regarding consumption on input date
+    '''
 
     real_path = os.path.realpath(__file__) #file path
     real_path = resolve_path(real_path)
@@ -26,7 +42,19 @@ def return_day(year, month, day):
     return dateDf
 
 def return_year(year): 
-    '''Returns part of dateframe regarding requested year'''
+    '''
+    Returns part of dateframe regarding requested year
+    
+    Parameters
+    ----------
+    year: string 
+        Year - whose graph is required - as string 
+    
+    Returns
+    -------
+    pandas DataFrame 
+        Part of DataFrame containing data regarding consumption on input year 
+    '''
 
     real_path = os.path.realpath(__file__) #file path 
     dir_path = os.path.dirname(real_path) #graphics path

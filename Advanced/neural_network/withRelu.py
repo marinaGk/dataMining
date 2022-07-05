@@ -1,3 +1,24 @@
+''' 
+Creates neural network to make energy requirement predictions. 
+
+Works with dataframe containing differences of current demand and renewable energy production. 
+Model contains LSTM layer and some hidden layers. It works with windows of five samples predicting a future, sixth one. 
+According to data those translate to samples per five minutes. 
+Calculations are applied recursively, for 100 epochs or less, depepnding on whether error increases or reduces with use of 
+EarlyStopping checkpoint. 
+Model saved is the one with less error by using ModelCheckpoint. 
+
+For error calculation uses RMSE and MAE. 
+
+Can be imported as module.
+
+Requires `pandas` and `numpy` libraries for data manipulation, 
+`math` library for calculations, 
+`os` library for path manipulation, 
+`keras` library to make model and prediction and 
+`sklearn` library for error calculation.
+'''
+
 import pandas as pd
 import numpy as np
 import math
@@ -15,7 +36,22 @@ from keras.models import load_model
 import sklearn.metrics as metrics
 
 def form_data(df, window_size): 
-    '''Forms data to be used in model'''
+    '''
+    Forms data to be used in model
+    
+    Parameters
+    ---------- 
+    df: pandas DataFrame 
+        DataFrame containing non-renewable energy requirements
+    window_size: integer 
+        Size of window used to separate data 
+
+    Returns
+    -------
+    X, y: nympy arrays
+        Numpy arrays containing formed data
+        For each element of X, containing window_size elements, there's an element of y
+    '''
 
     npdf = df.to_numpy()
     X=[]
@@ -31,7 +67,22 @@ def form_data(df, window_size):
     return np.array(X), np.array(y)
 
 def make_model(X_train, y_train, X_val, y_val): 
-    '''Makes the model and runs it to make prediction'''
+    '''
+    Makes the model
+    
+    Parameters
+    ----------
+    X_train: numpy array
+        Numpy array containing training data 
+        Each of its rows contains 5 values used to make prediction of non-renewable energy required as a 6th sample 
+    y_train: numpy arrray
+        Numpy array containing the actual value of non-renewable energy required -> actual value of 6th sample for each row of X_train
+    X_val: numpy array 
+        Numpy array containing evaluation data used to measure model accuracy 
+        Each of its rows contains 5 values used to make prediction of non-renewable energy required as a 6th sample 
+    y_val: numpy array 
+        Numpy array containing actual value of non-renewable energy required -> actual value of 6th sample for each row of X_val
+    '''
 
     model = Sequential()
     model.add(InputLayer((5, 1))) #input layer
@@ -48,6 +99,28 @@ def make_model(X_train, y_train, X_val, y_val):
     model.fit(X_train, y_train, validation_data=(X_val, y_val), epochs = 100, callbacks = [es, cp]) #runs for 100 epochs or less if error stops dropping 
 
 def check_prediction(X_train, y_train, X_val, y_val, X_test, y_test): 
+    '''
+    Loads already made model and checks its predictions by printing 
+    its results, the actual results and some error measurements using RMSE and MAE
+
+    Parameters
+    ----------
+    X_train: numpy array 
+        Numpy array containing training data 
+        Each of its rows contains 5 values used to make prediction of non-renewable energy required as a 6th sample 
+    y_train: numpy array
+        Numpy array containing the actual value of non-renewable energy required -> actual value of 6th sample for each row of X_train
+    X_val: numpy array
+        Numpy array containing evaluation data used to measure model accuracy 
+        Each of its rows contains 5 values used to make prediction of non-renewable energy required as a 6th sample 
+    y_val: numpy array 
+        Numpy array containing actual value of non-renewable energy required -> actual value of 6th sample for each row of X_val
+    X_test: numpy array 
+        Numpy array containing test data 
+        Is of same shape as X_train with smaller length and is used to calculate final model accuracy
+    y_test: numpy array
+        Numpy array containing actual value of non-renewable energy required -> actual value of 6th sample for each row of X_test
+    '''
 
     model1 = load_model('model/')
 
@@ -71,10 +144,10 @@ def check_prediction(X_train, y_train, X_val, y_val, X_test, y_test):
     print("Mean absolute error: ", mae)
     
 def make_prediction(): 
-    '''Uses merged data to find already known non renewable energy requirements and predict future ones'''
+    '''
+    Uses merged data to find already known non renewable energy requirements and predict future ones
+    '''
 
-    #directory=os.getcwd()
-    #os.chdir(directory)
     real_path = os.path.realpath(__file__) #file path
     dir_path = os.path.dirname(real_path) #neural network
     root_path = os.path.dirname(dir_path) #root 
@@ -113,6 +186,7 @@ def make_prediction():
 
     print(dir_path)
     os.chdir(dir_path)
+
     make_model(X_train, y_train, X_val, y_val)
 
     check_prediction(X_train, y_train, X_val, y_val, X_test, y_test)
