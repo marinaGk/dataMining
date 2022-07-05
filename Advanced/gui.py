@@ -16,6 +16,7 @@ import sys
 import os
 import pandas as pd
 
+
 real_path = os.path.realpath(__file__)
 real_path = resolve_path(real_path)
 dir_path = os.path.dirname(real_path)
@@ -26,6 +27,15 @@ sys.path.append(dir_path)
 data_path = "{}\data".format(dir_path)
 os.chdir(data_path)
 df = pd.read_csv("merged_files.csv")
+
+from zipfile import ZipFile
+
+if os.path.exists("processed_demands.zip"):
+    with ZipFile('processed_demands.zip', 'r') as zipObj:
+    # Extract all the contents of zip file in current directory
+        zipObj.extractall()
+    os.remove("processed_demands.zip")
+
 
 os.chdir(dir_path)
 import neural_network
